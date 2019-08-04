@@ -1,16 +1,22 @@
-const io_pub = require('socket.io')(8023);
-const io_sub = require('socket.io')(8024);
+const app = require("express")();
+const http = require("http").createServer(app);
+const io = require("socket.io")(http);
 
+app.get("/",(req,res)=>{
+  res.sendFile(__dirname + '/index.html');
+});
+app.get("/socket.io.js",(req,res)=>{
+  res.sendFile(__dirname + '/socket.io.js');
+});
 
-/*
- * サーバの接続
- */
-io_pub.on('connection', function ( socket ) {
+io.on("connection",socket => {
 
-  socket.on("message",msg => {
+  socket.on("chat message",msg => {
+    io.emit("chat message",msg);
+  });
 
-      io_sub.sockets.emit("message",msg);
- 
-  })
-  
+});
+
+http.listen(3000,()=>{
+  console.log("listening on *:3000");
 });
