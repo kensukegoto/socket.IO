@@ -1,29 +1,71 @@
-const app = require("express")();
-const http = require("http").createServer(app);
-const io = require("socket.io")(http);
+const express = require("express");
+const app = express();
+const path = require("path");
+const server = require("http").createServer(app);
+const io = require("socket.io")(server);
+const port = process.env.PORT || 3000;
 
-app.get("/",(req,res)=>{
-  res.sendFile(__dirname + '/index.html');
+server.listen(port,()=>{
+  console.log(`Server listening at port %d`,port)
 });
-app.get("/socket.io.js",(req,res)=>{
-  res.sendFile(__dirname + '/socket.io.js');
-});
 
-let users = {};
+app.use(express.static(path.join(__dirname,"public")));
 
-io.on("connection",socket => {
+let numUsers = 0;
 
-  if(!users[socket.id]){
-    users[socket.id] = "名無し"
-  }
-  socket.on("chat message",msgObj => {
-    const {m,user} = msgObj;
-    if(user) users[socket.id] = user;
-    io.emit("chat message",{user: users[socket.id],message: m});
+io.on("connect",socket => {
+
+  let addedUser = false;
+
+  socket.on("add user",username => {
+    
+    if(addedUser) return;
+
+    socket.username = username;
+    ++numUsers;
+    addedUser = true;
+    socket.emit("login",{
+      numUsers: numUsers
+    });
+
+    socket.broadcast.emit("user joined",{
+      username: socket.username,
+      numUsers: numUsers
+    });
   });
 
-});
+  // userがタイプをしているならば
+  socket.on("typing",() => {
+    socket.broadcast.emit("typing",{
+      username: socket.username
+    });
+  });
 
-http.listen(3000,()=>{
-  console.log("listening on *:3000");
+  // userがタイプを止めたならば
+  socket.on("stop typing",()=>{
+    socket.broadcast.emit("stop typing",{
+      username: socket.username
+    });
+  });
+
+  // userがメッセージを送ったならば
+  socket.on("new message",data => {
+    socket.broadcast.emit("new message",{
+      username: socket.username,
+      message: data
+    });
+  });
+
+  // userの接続が切れたならば
+  socket.on("disconnect",() => {
+    if(addedUser){
+      --numUsers;
+    }
+    socket.broadcast.emit("user left",{
+      username: socket.username,
+      numUsers: numUsers
+    });
+  });
+
+
 });
