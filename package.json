@@ -2,10 +2,13 @@
   "name": "sock",
   "version": "1.0.0",
   "description": "namespaceを使用すると複数のエンドポイントを作れる",
-  "browsers": ["> 2%"],
+  "browsers": [
+    "> 2%"
+  ],
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
+    "jquery": "^3.4.1",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0"
   },

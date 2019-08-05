@@ -31,6 +31,9 @@ ul {
   right: 0;
   margin: 0 auto;
 }
+.page:not(:first-child) {
+  display: none;
+}
 .page--room__header {
   height: 74px;
   width: 100%;

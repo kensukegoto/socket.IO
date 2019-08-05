@@ -16,16 +16,35 @@
           <input class="form" type="text" placeholder="Type here...">
         </div>
         <ul class="page--room__body rooms">
-          <li class="room"><a>俺の部屋</a></li>
-          <li class="room"><a>俺の部屋</a></li>
-          <li class="room"><a>俺の部屋</a></li>
-          <li class="room"><a>俺の部屋</a></li>
-          <li class="room"><a>俺の部屋</a></li>
+          <li class="room"><a data-room="n1">my room No.1</a></li>
+          <li class="room"><a data-room="n2">my room No.2</a></li>
+          <li class="room"><a data-room="n3">my room No.3</a></li>
+        </ul>
+      </li>
+      <li class="page--chat page">
+        <h3 class="title">Chat room</h3>
+        <ul class="messages">
         </ul>
       </li>
     </ul>
   </main>
   <script src="./js/socket.io.js"></script>
+  <script src="./js/jquery.min.js"></script>
   <script src="./js/main.bundle.js"></script>
+  <script>
+    const socket = io();
+    $(".room a").on("click",e => {
+      $(".page--room").fadeOut().next().fadeIn();
+      const target = e.currentTarget;
+      const room = $(target).data("room");
+      socket.emit("join room",{room: room});
+    })
+
+    socket.on("join",username => {
+      const $li = $("<li>").addClass("join-exit");
+      $li.text(username);
+      $(".messages").append($li);
+    });
+  </script>
 </body>
 </html>
