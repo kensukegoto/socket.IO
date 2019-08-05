@@ -1,17 +1,42 @@
 {
   "name": "sock",
   "version": "1.0.0",
-  "description": "my first socket.io app",
+  "description": "namespaceを使用すると複数のエンドポイントを作れる",
+  "browsers": ["> 2%"],
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0"
-  }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "core-js": "^3.1.4",
+    "css-mqpacker": "^7.0.0",
+    "gulp": "^4.0.2",
+    "gulp-dart-sass": "^0.9.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^8.0.0",
+    "regenerator-runtime": "^0.13.3",
+    "webpack": "^4.39.1",
+    "webpack-stream": "^5.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kensukegoto/socket.IO.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kensukegoto/socket.IO/issues"
+  },
+  "homepage": "https://github.com/kensukegoto/socket.IO#readme"
 }
