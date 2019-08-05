@@ -25,10 +25,10 @@
     <script src="/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
-      const socket = io("/my-namespace");
+      const socket = io("/my-namespace2");
       $("form").submit(e=>{
         e.preventDefault(); // prevents page reloading
-        socket.emit("chat message",$("#m").val());
+        socket.emit("chat message",{m:$("#m").val(),user:$("#user").val()});
         $("#m").val("");
         return false;
       })
