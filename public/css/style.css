@@ -58,12 +58,11 @@ ul {
 .page--room__body {
   margin-top: 74px;
 }
-
-.rooms .room {
+.page .rooms .room {
   font-size: 16px;
   border-bottom: 1px solid #fff;
 }
-.rooms .room a {
+.page .rooms .room a {
   padding: 8px 0;
   display: inline-block;
   width: 100%;
@@ -73,7 +72,7 @@ ul {
   z-index: 0;
   cursor: pointer;
 }
-.rooms .room a::after {
+.page .rooms .room a::after {
   content: "";
   position: absolute;
   z-index: -1;
@@ -84,6 +83,20 @@ ul {
   background-color: rgba(255, 255, 255, 0);
   transition: background-color 0.2s;
 }
-.rooms .room a:hover::after {
+.page .rooms .room a:hover::after {
   background-color: rgba(255, 255, 255, 0.3);
+}
+.page--chat .title {
+  font-size: 24px;
+  line-height: 1.6;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+}
+.page--chat .message {
+  padding: 8px 0;
+  border-bottom: 1px solid #fff;
+}
+.page--chat .message.join-exit {
+  color: #aaa;
+  text-align: center;
 }
