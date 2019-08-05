@@ -12,6 +12,12 @@ http.listen(port,()=>{
   console.log(`Server listening at port %d`,port);
 });
 
+let chatRooms = {
+  n1 : "始まりの部屋",
+  n2 : "次の部屋",
+  n3 : "そのまた次の部屋"
+};
+
 let userCount = 0;
 
 io.on("connection",socket => {
@@ -26,12 +32,11 @@ io.on("connection",socket => {
 
     // デフォルトを保存
     if(!defaultRoom) defaultRoom = Object.keys(socket.rooms)[0];
-
     if(currentRoom === data.room) return;
     
     currentRoom = data.room;
     socket.join(currentRoom);
-    io.to(currentRoom).emit("join",`ユーザーナンバー${userCount}さん`);
+    io.to(currentRoom).emit("join",`ユーザーナンバー${userCount}`);
     
   })
 })

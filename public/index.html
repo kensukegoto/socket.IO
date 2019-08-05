@@ -23,8 +23,7 @@
       </li>
       <li class="page--chat page">
         <h3 class="title">Chat room</h3>
-        <ul class="messages">
-        </ul>
+        <ul class="messages"></ul>
       </li>
     </ul>
   </main>
@@ -37,12 +36,14 @@
       $(".page--room").fadeOut().next().fadeIn();
       const target = e.currentTarget;
       const room = $(target).data("room");
+      const roomName = $(target).text();
+      $(".page--chat .title").text(roomName);
       socket.emit("join room",{room: room});
     })
 
     socket.on("join",username => {
-      const $li = $("<li>").addClass("join-exit");
-      $li.text(username);
+      const $li = $("<li>").addClass("message join-exit");
+      $li.text(`${username}さんが参加`);
       $(".messages").append($li);
     });
   </script>
