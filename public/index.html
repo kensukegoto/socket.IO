@@ -4,10 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Socket.IO Chat Example</title>
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+  <main>
+    <ul class="pages isRoom">
+      <li class="page--room page">
+        <div class="page--room__header">
+          <h3 class="title">Make new room?</h3>
+          <input class="form" type="text" placeholder="Type here...">
+        </div>
+        <ul class="page--room__body rooms">
+          <li class="room"><a>俺の部屋</a></li>
+          <li class="room"><a>俺の部屋</a></li>
+          <li class="room"><a>俺の部屋</a></li>
+          <li class="room"><a>俺の部屋</a></li>
+          <li class="room"><a>俺の部屋</a></li>
+        </ul>
+      </li>
+    </ul>
+  </main>
   <script src="./js/socket.io.js"></script>
   <script src="./js/main.bundle.js"></script>
 </body>
